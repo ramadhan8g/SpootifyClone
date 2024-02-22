@@ -3,6 +3,7 @@
 import React from 'react'
 import { Song } from "@/types";
 import SongItem from "@/components/SongItem";
+import useOnPlay from "@/hooks/useOnPlay";
 
 interface PageContentProps {
     songs: Song[];
@@ -11,6 +12,8 @@ interface PageContentProps {
 const PageContent: React.FC<PageContentProps> = ({
     songs
   }) => {
+
+    const onPlay = useOnPlay(songs);
   return (
     <div
     className="
@@ -25,9 +28,11 @@ const PageContent: React.FC<PageContentProps> = ({
         mt-4
       "
     >
+
     {songs.map((item) => (
+      
         <SongItem 
-          onClick={() => {}} 
+          onClick={(id: string) =>onPlay(id)} 
           key={item.id} 
           data={item}
         />

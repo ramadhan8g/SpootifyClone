@@ -17,6 +17,7 @@ const SongItem: React.FC<SongItemProps> = ({
 
   return (
     <div
+    onClick={() => onClick(data.id)} 
     className="
     relative 
     group 
