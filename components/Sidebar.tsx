@@ -8,13 +8,13 @@ import Box from "./Box";
 import { twMerge } from "tailwind-merge";
 import SidebarItem from "./Sidebaritem";
 import Library from "./Library";
-
+import { Song } from "@/types";
 interface SidebarProps {
     children: React.ReactNode;
-    // songs: Song[];
+    songs: Song[];
 }
 
-const Sidebar = ({ children }: SidebarProps) => {
+const Sidebar = ({ children,songs }: SidebarProps) => {
     // mengembalikan string nama jalur URL saat ini
     const pathname = usePathname();
     const routes = useMemo(() => [
@@ -52,7 +52,7 @@ const Sidebar = ({ children }: SidebarProps) => {
                
                     </Box>
                     <Box className="overflow-y-auto h-full">
-                        <Library songs={[]} />
+                        <Library songs={songs}  />
                     </Box>
                 </div>
                 <main className="h-full flex-1 overflow-y-auto py-2">
