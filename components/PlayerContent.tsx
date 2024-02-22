@@ -1,6 +1,6 @@
 "use client";
 
-// import useSound from "use-sound";
+import useSound from "use-sound";
 import { useEffect, useState } from "react";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { HiSpeakerWave, HiSpeakerXMark } from "react-icons/hi2";
@@ -11,7 +11,7 @@ import usePlayer from "@/hooks/usePlayer";
 
 import LikeButton from "./LikeButton";
 import MediaItem from "./MediaItem";
-// import Slider from "./Slider";
+import Slider from "./Slider";
 
 
 interface PlayerContentProps {
@@ -39,6 +39,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     const nextSong = player.ids[currentIndex + 1];
 
     if (!nextSong) {
+        // reset
       return player.setId(player.ids[0]);
     }
 
@@ -60,35 +61,35 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     player.setId(previousSong);
   }
 
-//   const [play, { pause, sound }] = useSound(
-//     songUrl,
-//     { 
-//       volume: volume,
-//       onplay: () => setIsPlaying(true),
-//       onend: () => {
-//         setIsPlaying(false);
-//         onPlayNext();
-//       },
-//       onpause: () => setIsPlaying(false),
-//       format: ['mp3']
-//     }
-//   );
+  const [play, { pause, sound }] = useSound(
+    songUrl,
+    { 
+      volume: volume,
+      onplay: () => setIsPlaying(true),
+      onend: () => {
+        setIsPlaying(false);
+        onPlayNext();
+      },
+      onpause: () => setIsPlaying(false),
+      format: ['mp3']
+    }
+  );
 
-//   useEffect(() => {
-//     sound?.play();
+  useEffect(() => {
+    sound?.play();
     
-//     return () => {
-//       sound?.unload();
-//     }
-//   }, [sound]);
+    return () => {
+      sound?.unload();
+    }
+  }, [sound]);
 
-//   const handlePlay = () => {
-//     if (!isPlaying) {
-//       play();
-//     } else {
-//       pause();
-//     }
-//   }
+  const handlePlay = () => {
+    if (!isPlaying) {
+      play();
+    } else {
+      pause();
+    }
+  }
 
   const toggleMute = () => {
     if (volume === 0) {
@@ -118,7 +119,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           "
         >
           <div 
-            // onClick={handlePlay} 
+            onClick={handlePlay} 
             className="
               h-10
               w-10
@@ -158,7 +159,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             "
           />
           <div 
-            // onClick={handlePlay} 
+            onClick={handlePlay} 
             className="
               flex 
               items-center 
@@ -192,10 +193,10 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
               className="cursor-pointer" 
               size={34} 
             />
-            {/* <Slider 
+            <Slider 
               value={volume} 
               onChange={(value) => setVolume(value)}
-            /> */}
+            />
           </div>
         </div>
 
